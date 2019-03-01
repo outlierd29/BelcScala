@@ -18,8 +18,8 @@ object Example02 {
 
     /* Archivo csv*/
 
-    val dfCountry = spark.read.csv(path = csvCountryPath)
-    dfCountry.show(numRows = 2)
+    val dfCountry = spark.read.format(source = "csv").option("header",true).load(path = csvCountryPath)
+    dfCountry.show(numRows = 5)
   }
 
 }
