@@ -16,10 +16,13 @@ object Example02 {
       // .enableHiveSupport()
       .getOrCreate()
 
+    spark.sparkContext.setLogLevel("ERROR")
+
     /* Archivo csv*/
 
     val dfCountry = spark.read.format(source = "csv").option("header",true).load(path = csvCountryPath)
     dfCountry.show(numRows = 5)
+    dfCountry.printSchema()
   }
 
 }
