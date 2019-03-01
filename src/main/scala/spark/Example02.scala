@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 
 object Example02 {
   def main(args: Array[String]): Unit = {
-
+    val csvCountryPath = "/home/davicin/IdeaProjects/belcorp/src/data/soccer/Country.csv"
     val conf = new SparkConf()
       .setAppName("CapacitacionSpark")
       .setMaster("local[*]")
@@ -18,7 +18,8 @@ object Example02 {
 
     /* Archivo csv*/
 
-    val dfCsv =
+    val dfCountry = spark.read.csv(path = csvCountryPath)
+    dfCountry.show(numRows = 2)
   }
 
 }
