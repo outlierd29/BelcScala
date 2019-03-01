@@ -28,8 +28,15 @@ object Example02 {
     dfMatch.show()
     dfMatch.createOrReplaceTempView(viewName = "Match")
 
-    val dfResult = spark.sql(sqlText = "SELECT count(1) FROM Match WHERE league_id = 2")
+    val dfResult = spark.sql(sqlText = "SELECT * FROM Match WHERE league_id = 1 limit 50")
     dfResult.show()
+
+    dfResult.coalesce(numPartitions = 1)
+      .write.mode(saveMode = "overwrite")
+      .format(source = "csv")
+      .save(path = csvPath + "results")
+
+
   }
 
 }
